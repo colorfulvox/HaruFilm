@@ -32,19 +32,19 @@ public class SigndownController {
             user = userService.getuserbyPid(signdownRequestDto.getUserpid());
         } catch (Exception e) {
             return ResponseEntity.status(500).body(ErrorResponseBody.of(500, false,
-                    "Internal Server Error 회원 탈퇴 실패 ^O^"));
+                    "Internal Server Error 회원 탈퇴 실패"));
         }
 
         if (!passwordencoder.matches(signdownRequestDto.getUserpassword(), user.getUserpassword())) {
-            return ResponseEntity.status(400).body(ErrorResponseBody.of(400, false, "비밀번호가 잘못 되었습니다. ^0^"));
+            return ResponseEntity.status(400).body(ErrorResponseBody.of(400, false, "비밀번호가 잘못 되었습니다."));
         } else {
 
             try {
                 userService.signdown(user);
-                return ResponseEntity.status(200).body(MessageBody.of(true, "회원 탈퇴가 완료 되었습니다. 잘가라 배.신.자"));
+                return ResponseEntity.status(200).body(MessageBody.of(true, "회원 탈퇴가 완료 되었습니다."));
             } catch (Exception e) {
                 return ResponseEntity.status(500).body(ErrorResponseBody.of(500, false,
-                        "Internal Server Error 회원 탈퇴 실패 ^O^"));
+                        "Internal Server Error 회원 탈퇴 실패"));
             }
         }
     }
